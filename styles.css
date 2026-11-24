@@ -6,6 +6,10 @@
   --text: #b1b1b1;          /* cream */
   --muted: #a8a196;         /* secondary text */
   --accent: #f4e8ff;        /* orange */
+  /* corner shape shared by buttons and form fields:
+     --chamfer = size of the cut, --round = rounding on each point of the cut */
+  --chamfer: 8px;
+  --round: 2px;
   --brand-tint: #f4e8ff;  /* tint for the logo and the hero graphic */
   --line: rgba(255, 248, 235, 0.1);
   --heading-font: "Comfortaa", sans-serif;
@@ -24,6 +28,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 112.5%;
 }
 
 body {
@@ -183,8 +188,6 @@ h1, h2, h3 {
   cursor: pointer;
   /* chamfered (cut) corners with slightly rounded points.
      --chamfer = size of the cut, --round = rounding on each corner of the cut */
-  --chamfer: 8px;
-  --round: 2px;
   --c: var(--chamfer);
   --r: var(--round);
   --rd: calc(var(--round) * 0.7071); /* rounding measured along the 45° edges */
@@ -472,26 +475,73 @@ h1, h2, h3 {
   gap: 0.75rem;
 }
 
-.signup-form input {
+/* Form fields: same chamfered shape as the buttons, with a thin border.
+   A clip-path hides ordinary borders on the angled corners, so the border is drawn
+   by the wrapper (.field): it is shaped like the button and filled with the border
+   color, and the input inside is shaped 1px smaller and filled with the field color. */
+.field,
+.field input {
+  --c: var(--chamfer);
+  --r: var(--round);
+  --rd: calc(var(--round) * 0.7071);
+  clip-path: polygon(
+    var(--c) 0, calc(100% - var(--c)) 0,
+    100% var(--c), 100% calc(100% - var(--c)),
+    calc(100% - var(--c)) 100%, var(--c) 100%,
+    0 calc(100% - var(--c)), 0 var(--c));
+  clip-path: shape(
+    from calc(var(--c) + var(--r)) 0,
+    line to calc(100% - var(--c) - var(--r)) 0,
+    curve to calc(100% - var(--c) + var(--rd)) var(--rd) with calc(100% - var(--c)) 0,
+    line to calc(100% - var(--rd)) calc(var(--c) - var(--rd)),
+    curve to 100% calc(var(--c) + var(--r)) with 100% var(--c),
+    line to 100% calc(100% - var(--c) - var(--r)),
+    curve to calc(100% - var(--rd)) calc(100% - var(--c) + var(--rd)) with 100% calc(100% - var(--c)),
+    line to calc(100% - var(--c) + var(--rd)) calc(100% - var(--rd)),
+    curve to calc(100% - var(--c) - var(--r)) 100% with calc(100% - var(--c)) 100%,
+    line to calc(var(--c) + var(--r)) 100%,
+    curve to calc(var(--c) - var(--rd)) calc(100% - var(--rd)) with var(--c) 100%,
+    line to var(--rd) calc(100% - var(--c) + var(--rd)),
+    curve to 0 calc(100% - var(--c) - var(--r)) with 0 calc(100% - var(--c)),
+    line to 0 calc(var(--c) + var(--r)),
+    curve to var(--rd) calc(var(--c) - var(--rd)) with 0 var(--c),
+    line to calc(var(--c) - var(--rd)) var(--rd),
+    curve to calc(var(--c) + var(--r)) 0 with var(--c) 0,
+    close);
+}
+
+.field {
   flex: 1;
   min-width: 0;
+  padding: 1px; /* border thickness */
+  background: rgba(255, 248, 235, 0.2); /* border color */
+  transition: background-color 0.2s;
+}
+
+.field:focus-within {
+  background: var(--text); /* brighter border while typing */
+}
+
+.field input {
+  /* inset by the border width; 0.59px keeps the angled borders 1px thick too */
+  --c: calc(var(--chamfer) - 0.59px);
+  display: block;
+  width: 100%;
   font: inherit;
   font-size: 0.95rem;
   padding: 0.85rem 1.4rem;
-  background: rgba(11, 10, 9, 0.35);
+  background: color-mix(in srgb, var(--bg) 35%, var(--bg-alt)); /* opaque dark field */
   color: var(--text);
-  border: 1px solid rgba(255, 248, 235, 0.2);
-  border-radius: 999px;
-  transition: border-color 0.2s;
+  border: none;
+  border-radius: 0;
 }
 
-.signup-form input::placeholder {
+.field input::placeholder {
   color: rgba(255, 248, 235, 0.5);
 }
 
-.signup-form input:focus {
+.field input:focus {
   outline: none;
-  border-color: var(--text);
 }
 
 .form-status {
