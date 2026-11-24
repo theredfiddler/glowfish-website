@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>glowfish</title>
+  <meta name="description" content="glowfish — a semi-modular midi sequencer.">
+  <link rel="icon" href="images/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#page" class="skip-link">Skip to Content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><img src="images/logo.webp" alt="glowfish"></a>
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="media.html">Media</a></li>
+      </ul>
+      <div class="nav-right">
+        <ul class="socials">
+          <li><a href="https://discord.gg/3WjWneDFB9" aria-label="Discord" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 5c1.5-.6 3-1 5-1s3.5.4 5 1c1.8 2.6 3 5.6 3 9.5-1.6 1.5-3.4 2.4-5 2.8l-1-1.8M7 5C5.2 7.6 4 10.6 4 14.5c1.6 1.5 3.4 2.4 5 2.8l1-1.8"/><circle cx="9" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+          </a></li>
+          <li><a href="https://www.instagram.com/glowfish.audio/" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a></li>
+          <li><a href="https://www.youtube.com/@glowfishaudio" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
+          </a></li>
+        </ul>
+        <a href="#signup" class="button">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="page">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-images">
+          <img src="images/hero-1.webp" alt="The glowfish's lit-up display showing colorful sequencer rings">
+          <img src="images/hero-2.webp" alt="glowfish layout diagram">
+        </div>
+        <h1>semi-modular midi sequencer</h1>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="feature">
+          <div class="feature-media"><img src="images/feature-1.webp" alt=""></div>
+          <p>Create up to 16 simultaneous melodies, each with a powerful 16-step sequencer and euclidean rhythm generator</p>
+        </div>
+        <div class="feature">
+          <div class="feature-media"><img src="images/feature-2.webp" alt=""></div>
+          <p>Shape the harmonic structure with a global pitch quantizer module</p>
+        </div>
+        <div class="feature">
+          <div class="feature-media pair">
+            <img src="images/feature-3a.webp" alt="">
+            <img src="images/feature-3b.webp" alt="">
+          </div>
+          <p>Each sequence can transpose another sequence in real time, output control change data, or even shift the global pitch quantizer</p>
+        </div>
+
+        <h3 class="coming-soon">more details and demonstration coming soon!</h3>
+        <p class="knobs">Up to 16 banks of dual-function midi control change knobs with detents enabling up to 512 total controls</p>
+      </div>
+    </section>
+
+    <section id="signup" class="signup">
+      <div class="container">
+        <h2>Join the List</h2>
+        <p>
+          Would you like to get your hands on a glowfish before anyone else does?
+          Is there a feature you would like to see put into development?
+          Please join the mailing list and you will receive production and feature updates.
+        </p>
+        <!-- TODO: connect this form to a mailing-list service (e.g. Mailchimp, Buttondown, Formspree)
+             by setting the form's action URL. Until then it only shows a message. -->
+        <form class="signup-form" id="signup-form">
+          <label>Name
+            <input type="text" name="name" autocomplete="name">
+          </label>
+          <label>Email
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <button type="submit" class="button">Sign Up</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <div>
+          <h2>About</h2>
+          <p>
+            The Glowfish was created by Gabriel Wheaton, a violinist and composer who wanted
+            a midi sequencer that was intuitive and simple without compromising on flexibility
+            and power. Over the past two years, he learned embedded programming and PCB design
+            to make this dream a reality.
+          </p>
+        </div>
+        <img src="images/about.webp" alt="Gabriel Wheaton">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> glowfish</p>
+      <p>
+        <a href="https://discord.gg/3WjWneDFB9" target="_blank" rel="noopener">Discord</a> ·
+        <a href="https://www.instagram.com/glowfish.audio/" target="_blank" rel="noopener">Instagram</a> ·
+        <a href="https://www.youtube.com/@glowfishaudio" target="_blank" rel="noopener">YouTube</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Placeholder until the form is connected to a mailing-list service.
+    document.getElementById("signup-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("form-status").textContent =
+        "Thanks! (Sign-up isn't connected yet.)";
+    });
+  </script>
+</body>
+</html>

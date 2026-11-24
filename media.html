@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media — glowfish</title>
+  <meta name="description" content="Videos and photos of the glowfish midi sequencer.">
+  <link rel="icon" href="images/logo.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#page" class="skip-link">Skip to Content</a>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><img src="images/logo.webp" alt="glowfish"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="media.html" aria-current="page">Media</a></li>
+      </ul>
+      <div class="nav-right">
+        <ul class="socials">
+          <li><a href="https://discord.gg/3WjWneDFB9" aria-label="Discord" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 5c1.5-.6 3-1 5-1s3.5.4 5 1c1.8 2.6 3 5.6 3 9.5-1.6 1.5-3.4 2.4-5 2.8l-1-1.8M7 5C5.2 7.6 4 10.6 4 14.5c1.6 1.5 3.4 2.4 5 2.8l1-1.8"/><circle cx="9" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+          </a></li>
+          <li><a href="https://www.instagram.com/glowfish.audio/" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a></li>
+          <li><a href="https://www.youtube.com/@glowfishaudio" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
+          </a></li>
+        </ul>
+        <a href="index.html#signup" class="button">Sign Up</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="page">
+    <div class="container">
+      <h1 class="page-title">Media</h1>
+
+      <!-- Each item is a thumbnail. To show the actual video, swap the <img> for a
+           <video> tag or a YouTube/Instagram embed, or wrap it in a link to the post. -->
+      <div class="media-grid">
+        <div class="media-item">
+          <img src="images/media-1.webp" alt="The glowfish sequencer on a desk with lit-up knobs">
+          <p>Glowfish ft. @buchlausa ZIGGY at @superbooth_berlin #superbooth26</p>
+        </div>
+        <div class="media-item">
+          <img src="images/media-2.webp" alt="The glowfish connected to a Moog Minitaur">
+          <p>Testing hardware midi #moogminitaur</p>
+        </div>
+        <div class="media-item">
+          <img src="images/media-3.webp" alt="The glowfish in a dawless jam setup">
+          <p>#dawlessjam #midicontroller #superbooth26 #synthesizers</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> glowfish</p>
+      <p>
+        <a href="https://discord.gg/3WjWneDFB9" target="_blank" rel="noopener">Discord</a> ·
+        <a href="https://www.instagram.com/glowfish.audio/" target="_blank" rel="noopener">Instagram</a> ·
+        <a href="https://www.youtube.com/@glowfishaudio" target="_blank" rel="noopener">YouTube</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
