@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>glowfish</title>
   <meta name="description" content="glowfish — a semi-modular midi sequencer.">
-  <link rel="icon" href="images/logo.webp">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
@@ -104,13 +105,15 @@
           Is there a feature you would like to see put into development?
           Please join the mailing list and you will receive production and feature updates.
         </p>
-        <!-- TODO: connect this form to a mailing-list service (e.g. Mailchimp, Buttondown, Formspree)
-             by setting the form's action URL. Until then it only shows a message. -->
+        <!-- Sign-ups are sent to a Google Apps Script that adds a row to a Google Sheet.
+             Set its web app URL as SIGNUP_URL in the script at the bottom of this page. -->
         <form class="signup-form" id="signup-form">
           <label class="visually-hidden" for="name">Name</label>
           <div class="field"><input type="text" id="name" name="name" placeholder="Name" autocomplete="name"></div>
           <label class="visually-hidden" for="email">Email</label>
           <div class="field"><input type="email" id="email" name="email" placeholder="Email address" autocomplete="email" required></div>
+          <!-- spam trap: hidden from people, bots fill it in and get ignored -->
+          <input type="text" name="website" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="button">Sign Up For Product Updates</button>
         </form>
         <p class="form-status" id="form-status" role="status"></p>
@@ -155,11 +158,31 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Placeholder until the form is connected to a mailing-list service.
-    document.getElementById("signup-form").addEventListener("submit", function (e) {
+    // Paste your Google Apps Script web app URL here (ends in /exec).
+    const SIGNUP_URL = "https://script.google.com/macros/s/AKfycbwCTBARC0v1gLV2SYjtUNpL6HxmidhJWbOSMsfgOc1Jd3bvEf6MCANBeYCJ5yMMyfbO/exec";
+
+    const form = document.getElementById("signup-form");
+    const status = document.getElementById("form-status");
+    const submitButton = form.querySelector("button[type=submit]");
+
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
-      document.getElementById("form-status").textContent =
-        "Thanks! (Sign-up isn't connected yet.)";
+      if (!SIGNUP_URL) {
+        status.textContent = "Sign-up isn't connected yet.";
+        return;
+      }
+      submitButton.disabled = true;
+      status.textContent = "Sending…";
+      try {
+        const response = await fetch(SIGNUP_URL, { method: "POST", body: new URLSearchParams(new FormData(form)) });
+        const result = await response.json();
+        if (!result.ok) throw new Error("rejected");
+        form.reset();
+        status.textContent = "Thanks, you're on the list!";
+      } catch (err) {
+        status.textContent = "Sorry, something went wrong. Please try again.";
+      }
+      submitButton.disabled = false;
     });
   </script>
 </body>
