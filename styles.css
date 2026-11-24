@@ -5,8 +5,8 @@
   --bg-alt: #3a3735;        /* warm grey */
   --text: #b1b1b1;          /* cream */
   --muted: #a8a196;         /* secondary text */
-  --accent: #e4b9ff;        /* orange */
-  --brand-tint: hwb(271 91% 0%);  /* tint for the logo and the hero graphic */
+  --accent: #f4e8ff;        /* orange */
+  --brand-tint: #f4e8ff;  /* tint for the logo and the hero graphic */
   --line: rgba(255, 248, 235, 0.1);
   --heading-font: "Comfortaa", sans-serif;
   --body-font: "Poppins", sans-serif;
@@ -29,7 +29,7 @@ html {
 body {
   font-family: var(--body-font);
   font-weight: 300;
-  font-size: 1rem;
+  font-size: 1.3rem;
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
@@ -307,7 +307,6 @@ h1, h2, h3 {
   position: relative;
   margin-bottom: 3rem;
   border-radius: var(--radius);
-  border: 1px solid var(--line);
   overflow: hidden;
 }
 
