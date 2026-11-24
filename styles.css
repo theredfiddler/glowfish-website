@@ -1,15 +1,16 @@
 /* ---------- Colors & fonts (matched to glowfish.live) ---------- */
 :root {
-  --bg: #0b0a09;          /* near-black background */
-  --bg-alt: #3a3735;      /* warm grey section background */
-  --text: #fff8eb;        /* cream text */
-  --muted: #cfc8bb;       /* softer cream for secondary text */
-  --accent: #ff6e14;      /* orange accent */
-  --line: rgba(255, 248, 235, 0.12);
+  --bg: #191715;            /* near-black background */
+  --bg-raised: #191715;     /* slightly lifted panels */
+  --bg-alt: #3a3735;        /* warm grey */
+  --text: #b1b1b1;          /* cream */
+  --muted: #a8a196;         /* secondary text */
+  --accent: #ff6e14;        /* orange */
+  --line: rgba(255, 248, 235, 0.1);
   --heading-font: "Comfortaa", sans-serif;
   --body-font: "Poppins", sans-serif;
-  --max-width: 1100px;
-  --radius: 999px;
+  --max-width: 1120px;
+  --radius: 16px;
 }
 
 * {
@@ -25,9 +26,11 @@ html {
 body {
   font-family: var(--body-font);
   font-weight: 300;
+  font-size: 1rem;
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 img {
@@ -36,19 +39,30 @@ img {
 }
 
 a {
-  color: var(--text);
+  color: inherit;
 }
 
 h1, h2, h3 {
   font-family: var(--heading-font);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
 }
 
 .skip-link {
@@ -65,122 +79,178 @@ h1, h2, h3 {
   z-index: 100;
 }
 
-/* ---------- Header ---------- */
+/* ---------- Header: nav left, logo centered, actions right ---------- */
 .site-header {
   position: sticky;
   top: 0;
-  background: rgba(11, 10, 9, 0.92);
-  backdrop-filter: blur(6px);
   z-index: 10;
+  background: rgba(11, 10, 9, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
 }
 
 .nav {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  height: 84px;
-}
-
-.logo img {
-  height: 64px;
-  width: auto;
+  height: 88px;
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 2.25rem;
   list-style: none;
-  margin-right: auto;
-  margin-left: 1rem;
 }
 
 .nav-links a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   text-decoration: none;
-  font-size: 0.95rem;
+  color: var(--muted);
+  transition: color 0.2s;
 }
 
 .nav-links a:hover,
 .nav-links a[aria-current="page"] {
-  color: var(--accent);
+  color: var(--text);
+}
+
+.logo img {
+  height: 68px;
+  width: auto;
 }
 
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  justify-content: flex-end;
+  gap: 1.5rem;
 }
 
 .socials {
   display: flex;
-  gap: 1rem;
+  gap: 1.1rem;
   list-style: none;
 }
 
 .socials a {
   display: flex;
-  color: var(--text);
+  color: var(--muted);
+  transition: color 0.2s;
 }
 
 .socials a:hover {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .socials svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 /* ---------- Buttons ---------- */
 .button {
   display: inline-block;
-  padding: 0.6rem 1.5rem;
+  padding: 0.7rem 1.6rem;
   background: var(--text);
   color: var(--bg);
   font-family: var(--body-font);
+  font-size: 0.8rem;
   font-weight: 500;
-  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-decoration: none;
-  border: none;
-  border-radius: var(--radius);
+  border: 1px solid var(--text);
+  border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .button:hover {
   background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.button-ghost {
+  background: transparent;
   color: var(--text);
+  border-color: var(--line);
+}
+
+.button-ghost:hover {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--text);
 }
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: 4rem 0 3rem;
+  padding: 7rem 0 6rem;
   text-align: center;
 }
 
-.hero-images {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
-  margin-bottom: 2.5rem;
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 4.25rem);
+  max-width: 14ch;
+  margin: 0 auto 2.5rem;
 }
 
-.hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
+}
+
+.hero-image {
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* soft orange glow behind the display image */
+.hero-image::before {
+  content: "";
+  position: absolute;
+  inset: 10% 5%;
+  background: radial-gradient(ellipse at center, rgba(255, 110, 20, 0.25), transparent 70%);
+  filter: blur(50px);
+  z-index: -1;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding: 7rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 /* ---------- Features ---------- */
-.features {
-  padding: 3rem 0 5rem;
-}
-
 .feature {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 5rem;
   align-items: center;
-  padding: 2.5rem 0;
+  padding: 3rem 0;
 }
 
 .feature:nth-child(even) .feature-media {
@@ -189,195 +259,316 @@ h1, h2, h3 {
 
 .feature-media {
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
+  align-items: center;
+  aspect-ratio: 4 / 3;
+  padding: 3rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
 .feature-media img {
-  max-width: 320px;
-  width: 100%;
+  max-height: 100%;
+  width: auto;
+  max-width: 70%;
 }
 
 .feature-media.pair img {
-  max-width: 220px;
+  max-width: 42%;
+}
+
+.feature-number {
+  display: block;
+  font-family: var(--heading-font);
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
 }
 
 .feature p {
-  font-size: 1.2rem;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  line-height: 1.6;
 }
 
-.coming-soon {
+/* ---------- Controls / coming soon ---------- */
+.controls {
   text-align: center;
-  padding: 3rem 0 1rem;
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
 }
 
-.knobs {
-  text-align: center;
-  max-width: 640px;
+.controls img {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto 3.5rem;
+}
+
+.controls p {
+  max-width: 34ch;
   margin: 0 auto;
-  font-size: 1.2rem;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+}
+
+.controls .note {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 /* ---------- Sign up ---------- */
 .signup {
   background: var(--bg-alt);
-  padding: 5rem 0;
+  border-top: none;
 }
 
 .signup .container {
-  max-width: 700px;
+  max-width: 680px;
   text-align: center;
 }
 
 .signup h2 {
-  font-size: 2rem;
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   margin-bottom: 1.25rem;
 }
 
+.signup .eyebrow {
+  color: var(--text);
+  opacity: 0.7;
+}
+
 .signup p {
-  margin-bottom: 2rem;
+  color: rgba(255, 248, 235, 0.8);
+  margin-bottom: 2.5rem;
 }
 
 .signup-form {
-  display: grid;
-  gap: 1rem;
-  text-align: left;
-}
-
-.signup-form label {
-  display: grid;
-  gap: 0.35rem;
-  font-size: 0.9rem;
+  display: flex;
+  gap: 0.75rem;
 }
 
 .signup-form input {
+  flex: 1;
+  min-width: 0;
   font: inherit;
-  padding: 0.75rem 1rem;
-  background: transparent;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.4rem;
+  background: rgba(11, 10, 9, 0.35);
   color: var(--text);
-  border: 1px solid var(--text);
-  border-radius: 6px;
+  border: 1px solid rgba(255, 248, 235, 0.2);
+  border-radius: 999px;
+  transition: border-color 0.2s;
+}
+
+.signup-form input::placeholder {
+  color: rgba(255, 248, 235, 0.5);
 }
 
 .signup-form input:focus {
-  outline: 2px solid var(--accent);
-  border-color: var(--accent);
-}
-
-.signup-form .button {
-  justify-self: center;
-  margin-top: 0.5rem;
+  outline: none;
+  border-color: var(--text);
 }
 
 .form-status {
-  text-align: center;
+  margin-top: 1rem;
   min-height: 1.5em;
+  font-size: 0.9rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
 /* ---------- About ---------- */
-.about {
-  padding: 5rem 0;
-}
-
 .about .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 5rem;
   align-items: center;
 }
 
 .about h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 1.5rem;
+}
+
+.about p {
+  color: var(--muted);
+  font-size: 1.05rem;
 }
 
 .about img {
-  border-radius: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
 }
 
 /* ---------- Media page ---------- */
-.page-title {
+.page-header {
   text-align: center;
-  font-size: clamp(2rem, 5vw, 3rem);
-  padding: 4rem 0 2.5rem;
+  padding: 6rem 0 4rem;
+}
+
+.page-header h1 {
+  font-size: clamp(2.2rem, 6vw, 4rem);
 }
 
 .media-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
-  padding-bottom: 5rem;
+  align-items: start;
+  padding-bottom: 7rem;
 }
 
-.media-item img {
-  border-radius: 12px;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  width: 100%;
+/* Instagram reels, cropped to just the video.
+   Instagram's embed page has a 54px white header, then a video area 125% as tall
+   as the iframe is wide (a 9:16 video centered with black bars), then white footer.
+   We show a 9:16 window: shift up 54px to hide the header, widen the iframe so the
+   video fills the width (16/9 / 1.25 = 142.2%), and center it to hide the bars.
+   If Instagram changes its embed layout, these numbers may need adjusting. */
+.ig-crop {
+  position: relative;
+  aspect-ratio: 9 / 15.8; /* slightly shorter than 9:16 to trim a sliver of white at the bottom */
+  overflow: hidden;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.3s;
+}
+
+.ig-crop:hover {
+  border-color: rgba(255, 248, 235, 0.25);
+}
+
+.ig-crop iframe {
+  position: absolute;
+  top: -54px;
+  left: -21.1%;
+  width: 142.2%;
+  height: calc(100% + 54px + 200px);
+  border: 0;
 }
 
 .media-item p {
-  margin-top: 0.75rem;
-  font-size: 0.95rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
   color: var(--muted);
+}
+
+.ig-link {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.ig-link:hover {
+  color: var(--accent);
 }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  padding: 2.5rem 0;
+  padding: 4rem 0;
   border-top: 1px solid var(--line);
-  font-size: 0.85rem;
+  text-align: center;
+}
+
+.site-footer img {
+  height: 56px;
+  width: auto;
+  margin: 0 auto 1.5rem;
+  opacity: 0.8;
+}
+
+.site-footer .socials {
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.site-footer small {
+  font-size: 0.8rem;
   color: var(--muted);
 }
 
-.site-footer .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
 /* ---------- Small screens ---------- */
-@media (max-width: 760px) {
+@media (max-width: 820px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  /* logo on top, nav and actions in a row beneath */
   .nav {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "logo logo"
+      "links right";
     height: auto;
-    padding: 0.75rem 0;
-    flex-wrap: wrap;
+    row-gap: 0.75rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+
+  .logo {
+    grid-area: logo;
+    justify-self: center;
   }
 
   .logo img {
-    height: 48px;
+    height: 52px;
   }
 
   .nav-links {
-    margin-left: 0;
+    grid-area: links;
     gap: 1.25rem;
   }
 
   .nav-right {
-    width: 100%;
-    justify-content: space-between;
+    grid-area: right;
+    gap: 1rem;
   }
 
-  .hero-images,
+  .nav-right .socials {
+    display: none;
+  }
+
+  .nav-right .button {
+    padding: 0.5rem 1.1rem;
+  }
+
+  .hero {
+    padding: 4rem 0;
+  }
+
+  .hero-actions {
+    margin-bottom: 3rem;
+  }
+
+  .section {
+    padding: 4.5rem 0;
+  }
+
   .feature,
   .about .container {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
   }
 
   .feature:nth-child(even) .feature-media {
     order: 0;
   }
 
-  .feature p {
-    text-align: center;
+  .feature-media {
+    padding: 2rem;
   }
 
-  .site-footer .container {
+  .signup-form {
     flex-direction: column;
   }
 }

@@ -16,11 +16,11 @@
 
   <header class="site-header">
     <div class="container nav">
-      <a href="index.html" class="logo"><img src="images/logo.webp" alt="glowfish"></a>
       <ul class="nav-links">
         <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="media.html">Media</a></li>
       </ul>
+      <a href="index.html" class="logo"><img src="images/logo.webp" alt="glowfish"></a>
       <div class="nav-right">
         <ul class="socials">
           <li><a href="https://discord.gg/3WjWneDFB9" aria-label="Discord" target="_blank" rel="noopener">
@@ -41,39 +41,61 @@
   <main id="page">
     <section class="hero">
       <div class="container">
-        <div class="hero-images">
-          <img src="images/hero-1.webp" alt="The glowfish's lit-up display showing colorful sequencer rings">
-          <img src="images/hero-2.webp" alt="glowfish layout diagram">
-        </div>
+        <span class="eyebrow">Introducing glowfish</span>
         <h1>semi-modular midi sequencer</h1>
+        <div class="hero-actions">
+          <a href="#signup" class="button">Join the List</a>
+          <a href="media.html" class="button button-ghost">See it in action</a>
+        </div>
+
       </div>
     </section>
 
-    <section class="features">
+    <section class="section" id="features">
       <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Features</span>
+          <h2>Built for melody</h2>
+        </div>
+
         <div class="feature">
           <div class="feature-media"><img src="images/feature-1.webp" alt=""></div>
-          <p>Create up to 16 simultaneous melodies, each with a powerful 16-step sequencer and euclidean rhythm generator</p>
+          <div>
+            <span class="feature-number">01</span>
+            <p>Create up to 16 simultaneous melodies, each with a powerful 16-step sequencer and euclidean rhythm generator</p>
+          </div>
         </div>
         <div class="feature">
           <div class="feature-media"><img src="images/feature-2.webp" alt=""></div>
-          <p>Shape the harmonic structure with a global pitch quantizer module</p>
+          <div>
+            <span class="feature-number">02</span>
+            <p>Shape the harmonic structure with a global pitch quantizer module</p>
+          </div>
         </div>
         <div class="feature">
           <div class="feature-media pair">
             <img src="images/feature-3a.webp" alt="">
             <img src="images/feature-3b.webp" alt="">
           </div>
-          <p>Each sequence can transpose another sequence in real time, output control change data, or even shift the global pitch quantizer</p>
+          <div>
+            <span class="feature-number">03</span>
+            <p>Each sequence can transpose another sequence in real time, output control change data, or even shift the global pitch quantizer</p>
+          </div>
         </div>
-
-        <h3 class="coming-soon">more details and demonstration coming soon!</h3>
-        <p class="knobs">Up to 16 banks of dual-function midi control change knobs with detents enabling up to 512 total controls</p>
       </div>
     </section>
 
-    <section id="signup" class="signup">
+    <section class="section controls">
       <div class="container">
+        <img src="images/hero-2.webp" alt="Diagram of the glowfish layout: a column of buttons beside a grid of knobs">
+        <p>Up to 16 banks of dual-function midi control change knobs with detents enabling up to 512 total controls</p>
+        <p class="note">more details and demonstration coming soon!</p>
+      </div>
+    </section>
+
+    <section id="signup" class="section signup">
+      <div class="container">
+        <span class="eyebrow">Mailing list</span>
         <h2>Join the List</h2>
         <p>
           Would you like to get your hands on a glowfish before anyone else does?
@@ -83,22 +105,21 @@
         <!-- TODO: connect this form to a mailing-list service (e.g. Mailchimp, Buttondown, Formspree)
              by setting the form's action URL. Until then it only shows a message. -->
         <form class="signup-form" id="signup-form">
-          <label>Name
-            <input type="text" name="name" autocomplete="name">
-          </label>
-          <label>Email
-            <input type="email" name="email" autocomplete="email" required>
-          </label>
+          <label class="visually-hidden" for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Name" autocomplete="name">
+          <label class="visually-hidden" for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email address" autocomplete="email" required>
           <button type="submit" class="button">Sign Up</button>
-          <p class="form-status" id="form-status" role="status"></p>
         </form>
+        <p class="form-status" id="form-status" role="status"></p>
       </div>
     </section>
 
-    <section id="about" class="about">
+    <section id="about" class="section about">
       <div class="container">
         <div>
-          <h2>About</h2>
+          <span class="eyebrow">About</span>
+          <h2>Made by a musician</h2>
           <p>
             The Glowfish was created by Gabriel Wheaton, a violinist and composer who wanted
             a midi sequencer that was intuitive and simple without compromising on flexibility
@@ -113,12 +134,19 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> glowfish</p>
-      <p>
-        <a href="https://discord.gg/3WjWneDFB9" target="_blank" rel="noopener">Discord</a> ·
-        <a href="https://www.instagram.com/glowfish.audio/" target="_blank" rel="noopener">Instagram</a> ·
-        <a href="https://www.youtube.com/@glowfishaudio" target="_blank" rel="noopener">YouTube</a>
-      </p>
+      <img src="images/logo.webp" alt="glowfish">
+      <ul class="socials">
+        <li><a href="https://discord.gg/3WjWneDFB9" aria-label="Discord" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M7 5c1.5-.6 3-1 5-1s3.5.4 5 1c1.8 2.6 3 5.6 3 9.5-1.6 1.5-3.4 2.4-5 2.8l-1-1.8M7 5C5.2 7.6 4 10.6 4 14.5c1.6 1.5 3.4 2.4 5 2.8l1-1.8"/><circle cx="9" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </a></li>
+        <li><a href="https://www.instagram.com/glowfish.audio/" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a></li>
+        <li><a href="https://www.youtube.com/@glowfishaudio" aria-label="YouTube" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
+        </a></li>
+      </ul>
+      <small>&copy; <span id="year"></span> glowfish</small>
     </div>
   </footer>
 
