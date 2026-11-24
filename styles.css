@@ -5,7 +5,8 @@
   --bg-alt: #3a3735;        /* warm grey */
   --text: #b1b1b1;          /* cream */
   --muted: #a8a196;         /* secondary text */
-  --accent: #ff6e14;        /* orange */
+  --accent: #e4b9ff;        /* orange */
+  --brand-tint: hwb(271 91% 0%);  /* tint for the logo and the hero graphic */
   --line: rgba(255, 248, 235, 0.1);
   --heading-font: "Comfortaa", sans-serif;
   --body-font: "Poppins", sans-serif;
@@ -115,9 +116,26 @@ h1, h2, h3 {
   color: var(--text);
 }
 
+.logo {
+  position: relative;
+  display: block;
+  line-height: 0;
+}
+
 .logo img {
   height: 150px;
   width: auto;
+  opacity: 0; /* kept for sizing and screen readers; the tinted copy below is what's drawn */
+}
+
+/* Logo drawn in --brand-tint: the logo image is used as a stencil for a colored layer */
+.logo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--brand-tint);
+  -webkit-mask: url("images/logo.webp") center / contain no-repeat;
+  mask: url("images/logo.webp") center / contain no-repeat;
 }
 
 .nav-right {
@@ -151,7 +169,7 @@ h1, h2, h3 {
 /* ---------- Buttons ---------- */
 .button {
   display: inline-block;
-  padding: 0.7rem 1.6rem;
+  padding: 0.5rem 1.2rem;
   background: var(--text);
   color: var(--bg);
   font-family: var(--body-font);
@@ -163,18 +181,43 @@ h1, h2, h3 {
   border: 1px solid transparent; /* no outline; keeps button sizes consistent */
   border-radius: 0;
   cursor: pointer;
-  /* chamfered (cut) corners; change --chamfer to adjust the cut size */
-  --chamfer: 10px;
+  /* chamfered (cut) corners with slightly rounded points.
+     --chamfer = size of the cut, --round = rounding on each corner of the cut */
+  --chamfer: 8px;
+  --round: 2px;
+  --c: var(--chamfer);
+  --r: var(--round);
+  --rd: calc(var(--round) * 0.7071); /* rounding measured along the 45° edges */
+  /* fallback for older browsers: sharp chamfer */
   clip-path: polygon(
-    var(--chamfer) 0, calc(100% - var(--chamfer)) 0,
-    100% var(--chamfer), 100% calc(100% - var(--chamfer)),
-    calc(100% - var(--chamfer)) 100%, var(--chamfer) 100%,
-    0 calc(100% - var(--chamfer)), 0 var(--chamfer));
+    var(--c) 0, calc(100% - var(--c)) 0,
+    100% var(--c), 100% calc(100% - var(--c)),
+    calc(100% - var(--c)) 100%, var(--c) 100%,
+    0 calc(100% - var(--c)), 0 var(--c));
+  /* modern browsers: same shape, each corner softened with a small curve */
+  clip-path: shape(
+    from calc(var(--c) + var(--r)) 0,
+    line to calc(100% - var(--c) - var(--r)) 0,
+    curve to calc(100% - var(--c) + var(--rd)) var(--rd) with calc(100% - var(--c)) 0,
+    line to calc(100% - var(--rd)) calc(var(--c) - var(--rd)),
+    curve to 100% calc(var(--c) + var(--r)) with 100% var(--c),
+    line to 100% calc(100% - var(--c) - var(--r)),
+    curve to calc(100% - var(--rd)) calc(100% - var(--c) + var(--rd)) with 100% calc(100% - var(--c)),
+    line to calc(100% - var(--c) + var(--rd)) calc(100% - var(--rd)),
+    curve to calc(100% - var(--c) - var(--r)) 100% with calc(100% - var(--c)) 100%,
+    line to calc(var(--c) + var(--r)) 100%,
+    curve to calc(var(--c) - var(--rd)) calc(100% - var(--rd)) with var(--c) 100%,
+    line to var(--rd) calc(100% - var(--c) + var(--rd)),
+    curve to 0 calc(100% - var(--c) - var(--r)) with 0 calc(100% - var(--c)),
+    line to 0 calc(var(--c) + var(--r)),
+    curve to var(--rd) calc(var(--c) - var(--rd)) with 0 var(--c),
+    line to calc(var(--c) - var(--rd)) var(--rd),
+    curve to calc(var(--c) + var(--r)) 0 with var(--c) 0,
+    close);
   transition: background-color 0.35s ease, color 0.2s;
   /* for the hover gradient layer below */
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
+  isolation: isolate; /* the clip-path shape below clips the hover gradient */
 }
 
 /* Every button: a red-orange-yellow gradient that fades in and flows on hover */
@@ -186,9 +229,9 @@ h1, h2, h3 {
   /* Three colors: red → orange → yellow and back. The in-between stops are
      browser-mixed blends of those three, spaced along a smooth wave so the
      color changes evenly with no visible bands. */
-  --glow-red: #e8261c;
-  --glow-orange: #ff6614;
-  --glow-yellow: #ffa31a;
+  --glow-red: #d4d7ff;
+  --glow-orange: #e4dcff;
+  --glow-yellow: #f6e6ff;
   background: linear-gradient(90deg,
     var(--glow-red) 0%,
     color-mix(in oklab, var(--glow-red), var(--glow-orange) 13%) 8.3%,
@@ -253,6 +296,34 @@ h1, h2, h3 {
   font-size: var(--title-size);
   max-width: 14ch;
   margin: 0 auto 2rem;
+}
+
+/* Front-panel graphic: full width of the content column, above the title text.
+   A colored overlay tints the light-grey lines; the black background stays black.
+   Change --brand-tint (top of this file, shared with the logo) to recolor it (any color, or a gradient), or delete the
+   .hero-graphic::after rule to show the original colors. */
+.hero-graphic {
+  --graphic-tint: var(--brand-tint);
+  position: relative;
+  margin-bottom: 3rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.hero-graphic img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-graphic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--graphic-tint);
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }
 
 .hero-actions {
@@ -562,10 +633,6 @@ h1, h2, h3 {
 
   .nav-right .socials {
     display: none;
-  }
-
-  .nav-right .button {
-    padding: 0.5rem 1.1rem;
   }
 }
 
