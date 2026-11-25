@@ -98,25 +98,29 @@
 
     <section id="signup" class="section signup">
       <div class="container">
-        <span class="eyebrow">Mailing list</span>
-        <h2>Join the List</h2>
-        <p>
-          Would you like to get your hands on a glowfish before anyone else does?
-          Is there a feature you would like to see put into development?
-          Please join the mailing list and you will receive production and feature updates.
-        </p>
-        <!-- Sign-ups are sent to a Google Apps Script that adds a row to a Google Sheet.
-             Set its web app URL as SIGNUP_URL in the script at the bottom of this page. -->
-        <form class="signup-form" id="signup-form">
-          <label class="visually-hidden" for="name">Name</label>
-          <div class="field"><input type="text" id="name" name="name" placeholder="Name" autocomplete="name"></div>
-          <label class="visually-hidden" for="email">Email</label>
-          <div class="field"><input type="email" id="email" name="email" placeholder="Email address" autocomplete="email" required></div>
-          <!-- spam trap: hidden from people, bots fill it in and get ignored -->
-          <input type="text" name="website" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button type="submit" class="button">Sign Up For Product Updates</button>
-        </form>
-        <p class="form-status" id="form-status" role="status"></p>
+        <div class="signup-intro">
+          <span class="eyebrow">Mailing list</span>
+          <h2>Join the List</h2>
+          <p>
+            Would you like to get your hands on a glowfish before anyone else does?
+            Is there a feature you would like to see put into development?
+            Please join the mailing list and you will receive production and feature updates.
+          </p>
+        </div>
+        <div class="signup-panel">
+          <!-- Sign-ups are sent to a Google Apps Script that adds a row to a Google Sheet.
+               Set its web app URL as SIGNUP_URL in the script at the bottom of this page. -->
+          <form class="signup-form" id="signup-form">
+            <label class="visually-hidden" for="name">Name</label>
+            <div class="field"><input type="text" id="name" name="name" placeholder="Name" autocomplete="name"></div>
+            <label class="visually-hidden" for="email">Email</label>
+            <div class="field"><input type="email" id="email" name="email" placeholder="Email address" autocomplete="email" required></div>
+            <!-- spam trap: hidden from people, bots fill it in and get ignored -->
+            <input type="text" name="website" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit" class="button">Sign Up For Product Updates</button>
+          </form>
+          <p class="form-status" id="form-status" role="status"></p>
+        </div>
       </div>
     </section>
 
@@ -157,33 +161,7 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Paste your Google Apps Script web app URL here (ends in /exec).
-    const SIGNUP_URL = "https://script.google.com/macros/s/AKfycbwCTBARC0v1gLV2SYjtUNpL6HxmidhJWbOSMsfgOc1Jd3bvEf6MCANBeYCJ5yMMyfbO/exec";
-
-    const form = document.getElementById("signup-form");
-    const status = document.getElementById("form-status");
-    const submitButton = form.querySelector("button[type=submit]");
-
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      if (!SIGNUP_URL) {
-        status.textContent = "Sign-up isn't connected yet.";
-        return;
-      }
-      submitButton.disabled = true;
-      status.textContent = "Sending…";
-      try {
-        const response = await fetch(SIGNUP_URL, { method: "POST", body: new URLSearchParams(new FormData(form)) });
-        const result = await response.json();
-        if (!result.ok) throw new Error("rejected");
-        form.reset();
-        status.textContent = "Thanks, you're on the list!";
-      } catch (err) {
-        status.textContent = "Sorry, something went wrong. Please try again.";
-      }
-      submitButton.disabled = false;
-    });
   </script>
+  <script src="signup.js"></script>
 </body>
 </html>

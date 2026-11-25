@@ -34,7 +34,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>
           </a></li>
         </ul>
-        <a href="index.html#signup" class="button">Sign Up</a>
+        <a href="#signup" class="button">Sign Up</a>
       </div>
     </div>
   </header>
@@ -72,6 +72,34 @@
         </div>
       </div>
     </div>
+
+    <section id="signup" class="section signup">
+      <div class="container">
+        <div class="signup-intro">
+          <span class="eyebrow">Mailing list</span>
+          <h2>Join the List</h2>
+          <p>
+            Would you like to get your hands on a glowfish before anyone else does?
+            Is there a feature you would like to see put into development?
+            Please join the mailing list and you will receive production and feature updates.
+          </p>
+        </div>
+        <div class="signup-panel">
+          <!-- Sign-ups are sent to a Google Apps Script that adds a row to a Google Sheet.
+               Set its web app URL as SIGNUP_URL in the script at the bottom of this page. -->
+          <form class="signup-form" id="signup-form">
+            <label class="visually-hidden" for="name">Name</label>
+            <div class="field"><input type="text" id="name" name="name" placeholder="Name" autocomplete="name"></div>
+            <label class="visually-hidden" for="email">Email</label>
+            <div class="field"><input type="email" id="email" name="email" placeholder="Email address" autocomplete="email" required></div>
+            <!-- spam trap: hidden from people, bots fill it in and get ignored -->
+            <input type="text" name="website" class="trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit" class="button">Sign Up For Product Updates</button>
+          </form>
+          <p class="form-status" id="form-status" role="status"></p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
@@ -95,5 +123,6 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <script src="signup.js"></script>
 </body>
 </html>
