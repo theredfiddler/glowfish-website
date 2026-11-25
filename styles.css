@@ -30,7 +30,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 140%;
+  font-size: 110%;
 }
 
 body {
@@ -106,12 +106,12 @@ h1, h2, h3 {
 .nav-links {
   display: flex;
   justify-content: flex-end; /* menu hugs the logo from the left */
-  gap: 2.25rem;
+  gap: 2.4rem;
   list-style: none;
 }
 
 .nav-links a {
-  font-size: 0.8rem;
+  font-size: .8rem;
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
