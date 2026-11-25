@@ -96,12 +96,14 @@ h1, h2, h3 {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
+  column-gap: 2.5rem; /* space between the logo and the menu / icons on each side */
   padding-top: 1.75rem;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.75rem;
 }
 
 .nav-links {
   display: flex;
+  justify-content: flex-end; /* menu hugs the logo from the left */
   gap: 2.25rem;
   list-style: none;
 }
@@ -146,8 +148,12 @@ h1, h2, h3 {
 .nav-right {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start; /* icons hug the logo from the right */
   gap: 1.5rem;
+}
+
+.nav-right .button {
+  margin-left: auto; /* Sign Up stays at the far right edge */
 }
 
 .socials {
@@ -167,8 +173,8 @@ h1, h2, h3 {
 }
 
 .socials svg {
-  width: 18px;
-  height: 18px;
+  width: 26px;  /* icon size */
+  height: 26px;
 }
 
 /* ---------- Buttons ---------- */
@@ -735,6 +741,7 @@ h1, h2, h3 {
 
   .nav-links {
     grid-area: links;
+    justify-content: flex-start;
   }
 
   .nav-right {
