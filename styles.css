@@ -636,7 +636,7 @@ h1, h2, h3 {
 
 .about p {
   color: var(--muted);
-  font-size: 1.05rem;
+  font-size: 0.9rem;
 }
 
 .about img {
@@ -737,12 +737,8 @@ h1, h2, h3 {
 }
 
 /* ---------- Header on narrower screens ---------- */
-/* hide the header social icons first (they're also in the footer) */
-@media (max-width: 720px) {
-  .nav-links {
-    gap: 1.25rem;
-  }
-
+/* hide the header social icons at very narrow widths (they're also in the footer) */
+@media (max-width: 400px) {
   .nav-right .socials {
     display: none;
   }
